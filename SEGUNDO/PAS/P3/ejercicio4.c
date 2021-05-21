@@ -17,8 +17,6 @@ int main(int argc, char **argv)
 	// Para realizar el fork
 	pid_t pid;
 	int flag, status;
-	// Para controlar los valores devueltos por las funciones (control de errores)
-	float resultado;
     
 	// Cola
 	mqd_t cola;
