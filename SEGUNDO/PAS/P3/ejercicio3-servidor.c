@@ -35,7 +35,9 @@ int main(int argc, char **argv)
 	struct mq_attr attr;
 	// Buffer para intercambiar mensajes
 	char buffer[MAX_SIZE];
-    // Entero que mide el tamaño de los mensajes.
+	// Cadena auxiliar para funcionLog()
+	char msgserver[MAX_SIZE];
+	// Entero que mide el tamaño de los mensajes.
     int caract = 0;
 	// flag que indica cuando hay que parar. Se escribe palabra exit
 	int must_stop = 0;
@@ -48,10 +50,19 @@ int main(int argc, char **argv)
 
     // Nombre para la cola. Al concatenar el login sera unica en un sistema compartido.
 	sprintf(serverQueueName, "%s-%s", SERVER_QUEUE, getenv("USER"));
-    printf ("[Servidor]: El nombre de la cola 1 es: %s\n", serverQueueName);
+    printf ("[Servidor]: El nombre de la cola servidor es: %s\n", serverQueueName);
+
+		// Para funcionLog()
+		sprintf(msgserver,"[Servidor]: El nombre de la cola servidor es: %s\n", serverQueueName);
+		funcionLog(msgserver);
+
 
 	sprintf(clientQueueName, "%s-%s", CLIENT_QUEUE, getenv("USER"));
-    printf ("[Servidor]: El nombre de la cola 2 es: %s\n", clientQueueName);
+    printf ("[Servidor]: El nombre de la cola cliente es: %s\n", clientQueueName);
+
+		// Para funcionLog()
+		sprintf(msgserver,"[Servidor]: El nombre de la cola cliente es: %s\n", clientQueueName);
+		funcionLog(msgserver);
 
 	// Crear la cola de mensajes del servidor. La cola CLIENT_QUEUE le servira en ejercicio resumen
 	colaServer = mq_open(serverQueueName, O_CREAT | O_RDONLY, 0644, &attr);
@@ -66,15 +77,22 @@ int main(int argc, char **argv)
    	perror("Error al abrir la cola1 del servidor");
       exit(-1);
 	}
-    printf ("[Servidor]: El descriptor de la cola 1 es: %d\n", (int) colaServer);
+    printf ("[Servidor]: El descriptor de la cola servidor es: %d\n", (int) colaServer);
+
+		// Para funcionLog()
+		sprintf(msgserver,"[Servidor]: El descriptor de la cola servidor es: %d\n", (int) colaServer);
+		funcionLog(msgserver);
 
     if(colaClient == (mqd_t)-1 )
 	{
    	perror("Error al abrir la cola2 del servidor");
       exit(-1);
 	}
-    printf ("[Servidor]: El descriptor de la cola 2 es: %d\n", (int) colaClient);
-
+    printf ("[Servidor]: El descriptor de la cola cliente es: %d\n", (int) colaClient);
+		
+		// Para funcionLog()
+		sprintf(msgserver,"[Servidor]: El descriptor de la cola cliente es: %d\n", (int) colaClient);
+		funcionLog(msgserver);
 
 	do
 	{
@@ -108,30 +126,49 @@ int main(int argc, char **argv)
 		else
         {
 			printf("Recibido el mensaje: %s\n", buffer);
-        }
 
-        // Enviar mensaje con la longitud
-        if(mq_send(colaClient, num_caract, MAX_SIZE, 0) != 0)
-		{
-			perror("Error al enviar el mensaje");
-			exit(-1);
+			// Para funcionLog()
+			sprintf(msgserver,"Recibido el mensaje: %s\n", buffer);
+			funcionLog(msgserver);
+
+
+			// Enviar mensaje con la longitud
+			if(mq_send(colaClient, num_caract, MAX_SIZE, 0) != 0)
+			{
+				perror("Error al enviar el mensaje");
+
+					// Para funcionLog()
+					sprintf(msgserver,"Error al enviar el mensaje");
+					funcionLog(msgserver);
+
+				exit(-1);
+			}    
+			    
 		}
-
-
 
 	} while (!must_stop); 	// Iterar hasta que llegue el código de salida, es decir, la palabra exit
 
 	// Cerrar la cola del servidor
 	if(mq_close(colaServer) == (mqd_t)-1)
 	{
-		perror("Error al cerrar la cola del servidor");
+		perror("Error al cerrar la cola del servidor.");
+
+			// Para funcionLog()
+			sprintf(msgserver,"Error al cerrar la cola del servidor.");
+			funcionLog(msgserver);
+		
 		exit(-1);
 	}
 
 	//Cerrar la cola del cliente
 	if(mq_close(colaClient) == (mqd_t)-1)
 	{
-		perror("Error al cerrar la cola del servidor");
+		perror("Error al cerrar la cola del cliente.");
+
+			// Para funcionLog()
+			sprintf(msgserver,"Error al cerrar la cola del cliente.");
+			funcionLog(msgserver);
+		
 		exit(-1);
 	}
 
@@ -139,16 +176,63 @@ int main(int argc, char **argv)
 	// Eliminar la cola del servidor
 	if(mq_unlink(serverQueueName) == (mqd_t)-1)
 	{
-		perror("Error al eliminar la cola del servidor");
+		perror("Error al eliminar la cola del servidor.");
+
+			// Para funcionLog()
+			sprintf(msgserver,"Error al eliminar la cola del servidor.");
+			funcionLog(msgserver);
+		
 		exit(-1);
 	}
 
 	//Eliminar la cola del cliente
 	if(mq_unlink(clientQueueName) == (mqd_t)-1)
 	{
-		perror("Error al eliminar la cola del servidor");
+		perror("Error al eliminar la cola del cliente.");
+
+			// Para funcionLog()
+			sprintf(msgserver,"Error al eliminar la cola del cliente.");
+			funcionLog(msgserver);
+
 		exit(-1);
 	}
 
 	return 0;
+}
+
+// Función auxiliar, escritura de un log.
+void funcionLog(char *mensaje)
+{
+	int resultado;
+	char nombreFichero[100];
+	char mensajeAEscribir[300];
+	time_t t;
+
+	// Abrir el fichero
+	sprintf(nombreFichero,"log-servidor.txt");
+	if(fLog==NULL)
+	{
+		fLog = fopen(nombreFichero,"at");
+		if(fLog==NULL)
+		{
+			perror("Error abriendo el fichero de log");
+			exit(1);
+		}
+	}
+
+	// Obtener la hora actual
+	t = time(NULL);
+	struct tm * p = localtime(&t);
+	strftime(mensajeAEscribir, 1000, "[%Y-%m-%d, %H:%M:%S]", p);
+
+	// Vamos a incluir la hora y el mensaje que nos pasan
+	sprintf(mensajeAEscribir, "%s ==> %s\n", mensajeAEscribir, mensaje);
+
+	// Escribir finalmente en el fichero
+	resultado = fputs(mensajeAEscribir,fLog);
+	if (resultado < 0)
+		perror("Error escribiendo en el fichero de log");
+
+	fclose(fLog);
+	fLog=NULL;
 }
