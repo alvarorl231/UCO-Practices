@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 	attr.mq_msgsize = MAX_SIZE; // Maximo tamaño de un mensaje
 	// Buffer para intercambiar mensajes
 	char buffer[MAX_SIZE];
-    // Entero que mide el tamaño de los mensajes.
+    // Cadena que mide el tamaño de los mensajes.
 	char caracteres[MAX_SIZE];
 	// flag que indica cuando hay que parar. Se escribe palabra exit
 	int must_stop = 0;
