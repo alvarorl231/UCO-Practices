@@ -1,0 +1,21 @@
+1º
+code <nombre>.sh &  
+        ó
+gedit <nombre>.sh &
+//Esto lo que hace es abrir visual estudio ó el editor de textos de linux 
+//(ambos hay que instalarlos antes) y crea el fichero con el nombre que has escrito. (sudo apt-get install gedit)
+
+2º (dentro del fichero)
+#!/bin/bash
+<codigo>
+...
+...
+...
+//Código del programa, al acabar, guardamos y cerramos el archivo simplemente.
+
+3º
+chmod u+x <nombre>.sh
+//Estamos dando permisos al ususario para hacer ese fichero ejecutable
+
+4º
+./<nombre>.sh
