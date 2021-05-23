@@ -264,7 +264,9 @@ void funcionLog(char *mensaje)
 void captaseniales(int signal)
 {
 	sprintf(buffer, "Capturada la señal con identificador: %d", signal);
+	printf("\t ---> %s!\n",buffer);
 	funcionLog(buffer);
+
 	if(mq_send(colaServer, buffer, MAX_SIZE, 0) != 0)
 	{
 		perror("Error al enviar el mensaje");

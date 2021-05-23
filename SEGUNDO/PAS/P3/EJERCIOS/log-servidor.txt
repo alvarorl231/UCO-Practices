@@ -39,3 +39,56 @@
 
 [2021-05-23, 13:09:48] ==> Recibido el mensaje: Capturada la señal con identificador: 2
 
+[2021-05-23, 13:13:15] ==> [Servidor]: El nombre de la cola servidor es: /server_queue-pas
+
+[2021-05-23, 13:13:15] ==> [Servidor]: El nombre de la cola cliente es: /client_queue-pas
+
+[2021-05-23, 13:13:15] ==> [Servidor]: El descriptor de la cola servidor es: 3
+
+[2021-05-23, 13:13:15] ==> [Servidor]: El descriptor de la cola cliente es: 14
+
+[2021-05-23, 13:13:20] ==> Recibido el mensaje: hola
+
+
+[2021-05-23, 13:13:39] ==> [Servidor]: El nombre de la cola servidor es: /server_queue-pas
+
+[2021-05-23, 13:13:39] ==> [Servidor]: El nombre de la cola cliente es: /client_queue-pas
+
+[2021-05-23, 13:13:39] ==> [Servidor]: El descriptor de la cola servidor es: 3
+
+[2021-05-23, 13:13:39] ==> [Servidor]: El descriptor de la cola cliente es: 14
+
+[2021-05-23, 13:13:44] ==> Recibido el mensaje: hola
+
+
+[2021-05-23, 13:13:47] ==> Recibido el mensaje: Capturada la señal con identificador: 2
+
+[2021-05-23, 13:17:03] ==> [Servidor]: El nombre de la cola servidor es: /server_queue-pas
+
+[2021-05-23, 13:17:03] ==> [Servidor]: El nombre de la cola cliente es: /client_queue-pas
+
+[2021-05-23, 13:17:03] ==> [Servidor]: El descriptor de la cola servidor es: 3
+
+[2021-05-23, 13:17:03] ==> [Servidor]: El descriptor de la cola cliente es: 14
+
+[2021-05-23, 13:17:11] ==> Recibido el mensaje: hola
+
+
+[2021-05-23, 13:17:12] ==> Recibido el mensaje: que tal
+
+
+[2021-05-23, 13:17:14] ==> Recibido el mensaje: todo bien
+
+
+[2021-05-23, 13:17:15] ==> Recibido el mensaje: Capturada la señal con identificador: 2
+
+[2021-05-23, 13:17:52] ==> [Servidor]: El nombre de la cola servidor es: /server_queue-pas
+
+[2021-05-23, 13:17:52] ==> [Servidor]: El nombre de la cola cliente es: /client_queue-pas
+
+[2021-05-23, 13:17:52] ==> [Servidor]: El descriptor de la cola servidor es: 3
+
+[2021-05-23, 13:17:52] ==> [Servidor]: El descriptor de la cola cliente es: 14
+
+[2021-05-23, 13:17:54] ==> Recibido el mensaje: Capturada la señal con identificador: 2
+

@@ -46,3 +46,71 @@
 [2021-05-23, 13:09:48] ==> Capturada la señal con identificador: 2
 [2021-05-23, 13:09:48] ==> exit
 
+[2021-05-23, 13:13:18] ==> [Cliente]: El nombre de la cola servidor es: /server_queue-pas
+
+[2021-05-23, 13:13:18] ==> [Cliente]: El nombre de la cola cliente es: /client_queue-pas
+
+[2021-05-23, 13:13:18] ==> [Cliente]: El descriptor de la cola servidor es: 3
+
+[2021-05-23, 13:13:18] ==> [Cliente]: El descriptor de la cola cliente es: 14
+
+[2021-05-23, 13:13:18] ==> Mandando mensajes al servidor (escribir "exit" para parar):
+[2021-05-23, 13:13:20] ==> > hola
+
+[2021-05-23, 13:13:20] ==> Número de caracteres recibidos: 4
+[2021-05-23, 13:13:22] ==> Capturada la señal con identificador: 2
+[2021-05-23, 13:13:22] ==> exit
+
+[2021-05-23, 13:13:42] ==> [Cliente]: El nombre de la cola servidor es: /server_queue-pas
+
+[2021-05-23, 13:13:42] ==> [Cliente]: El nombre de la cola cliente es: /client_queue-pas
+
+[2021-05-23, 13:13:42] ==> [Cliente]: El descriptor de la cola servidor es: 3
+
+[2021-05-23, 13:13:42] ==> [Cliente]: El descriptor de la cola cliente es: 14
+
+[2021-05-23, 13:13:42] ==> Mandando mensajes al servidor (escribir "exit" para parar):
+[2021-05-23, 13:13:44] ==> > hola
+
+[2021-05-23, 13:13:44] ==> Número de caracteres recibidos: 4
+[2021-05-23, 13:13:47] ==> Capturada la señal con identificador: 2
+[2021-05-23, 13:13:47] ==> exit
+
+[2021-05-23, 13:17:07] ==> [Cliente]: El nombre de la cola servidor es: /server_queue-pas
+
+[2021-05-23, 13:17:07] ==> [Cliente]: El nombre de la cola cliente es: /client_queue-pas
+
+[2021-05-23, 13:17:07] ==> [Cliente]: El descriptor de la cola servidor es: 3
+
+[2021-05-23, 13:17:07] ==> [Cliente]: El descriptor de la cola cliente es: 14
+
+[2021-05-23, 13:17:07] ==> Mandando mensajes al servidor (escribir "exit" para parar):
+[2021-05-23, 13:17:11] ==> > hola
+
+[2021-05-23, 13:17:11] ==> Número de caracteres recibidos: 4
+[2021-05-23, 13:17:12] ==> > que tal
+
+[2021-05-23, 13:17:12] ==> Número de caracteres recibidos: 7
+[2021-05-23, 13:17:14] ==> > todo bien
+
+[2021-05-23, 13:17:14] ==> Número de caracteres recibidos: 9
+[2021-05-23, 13:17:15] ==> Capturada la señal con identificador: 2
+[2021-05-23, 13:17:15] ==> exit
+
+[2021-05-23, 13:17:49] ==> [Cliente]: El nombre de la cola servidor es: /server_queue-pas
+
+[2021-05-23, 13:17:49] ==> [Cliente]: El nombre de la cola cliente es: /client_queue-pas
+
+[2021-05-23, 13:17:49] ==> Error al abrir la cola del servidor.
+[2021-05-23, 13:17:53] ==> [Cliente]: El nombre de la cola servidor es: /server_queue-pas
+
+[2021-05-23, 13:17:53] ==> [Cliente]: El nombre de la cola cliente es: /client_queue-pas
+
+[2021-05-23, 13:17:53] ==> [Cliente]: El descriptor de la cola servidor es: 3
+
+[2021-05-23, 13:17:53] ==> [Cliente]: El descriptor de la cola cliente es: 14
+
+[2021-05-23, 13:17:53] ==> Mandando mensajes al servidor (escribir "exit" para parar):
+[2021-05-23, 13:17:54] ==> Capturada la señal con identificador: 2
+[2021-05-23, 13:17:54] ==> exit
+
