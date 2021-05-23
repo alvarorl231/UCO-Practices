@@ -6,6 +6,7 @@ recogida por teclado, mientras que el valor de esa cadena sea distinto a la pala
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <signal.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <mqueue.h>
@@ -20,27 +21,46 @@ recogida por teclado, mientras que el valor de esa cadena sea distinto a la pala
 
 //Prototipo de funcion
 void funcionLog(char *);
+void captaseniales (int signal);
+
+// Cola del servidor
+mqd_t colaServer;
+mqd_t colaClient;
+
+// Buffer para intercambiar mensajes
+char buffer[MAX_SIZE];
+
 // Apuntador al fichero de log.
 FILE *fLog = NULL;
 
 int main(int argc, char **argv)
 {
-	// Cola del servidor
-	mqd_t colaServer;
-	mqd_t colaClient;
+
+	// Captura de señales
+	if (signal(SIGINT, captaseniales) == SIG_ERR)
+   	{
+	   	printf("No puedo asociar la señal SIGINT al manejador!\n");
+      	funcionLog("No puedo asociar la señal SIGINT al manejador!");
+	}
+
+	// Captura de señales
+   	if (signal(SIGTERM, captaseniales) == SIG_ERR)
+	{
+   		printf("No puedo asociar la señal SIGTERM al manejador!\n");
+   		funcionLog("No puedo asociar la señal SIGTERM al manejador!");
+	}
+
 	// Atributos de la cola
 	struct mq_attr attr;
 	// Inicializar los atributos de la cola
 	attr.mq_maxmsg = 10;        // Maximo número de mensajes
 	attr.mq_msgsize = MAX_SIZE; // Maximo tamaño de un mensaje
-	// Buffer para intercambiar mensajes
-	char buffer[MAX_SIZE];
     // Cadena que mide el tamaño de los mensajes.
 	char caracteres[MAX_SIZE];
-	// flag que indica cuando hay que parar. Se escribe palabra exit
-	int must_stop = 0;
 	// Cadena auxiliar para funcionLog()
 	char msgclient[MAX_SIZE];
+	// flag que indica cuando hay que parar. Se escribe palabra exit
+	int must_stop = 0;
     // Nombre para la cola
     char serverQueueName[100];
     char clientQueueName[100];
@@ -238,4 +258,43 @@ void funcionLog(char *mensaje)
 
 	fclose(fLog);
 	fLog=NULL;
+}
+
+// Captura señales y cierra el programa
+void captaseniales(int signal)
+{
+	sprintf(buffer, "Capturada la señal con identificador: %d", signal);
+	funcionLog(buffer);
+	if(mq_send(colaServer, buffer, MAX_SIZE, 0) != 0)
+	{
+		perror("Error al enviar el mensaje");
+		funcionLog("Error al enviar el mensaje");
+	}	
+	
+	sprintf(buffer, "exit\n");
+
+	if(mq_send(colaServer, buffer, MAX_SIZE, 0) != 0)
+	{
+		perror("Error al enviar el mensaje");
+		funcionLog("Error al enviar el mensaje");
+		exit(-1);
+	}
+
+	funcionLog(buffer);
+	printf("\n");
+
+	if(mq_close(colaServer) == (mqd_t)-1)
+	{
+		perror("Error al cerrar la cola del servidor");
+		funcionLog("Error al cerrar la cola del servidor");
+		exit(-1);
+	}
+
+	if(mq_close(colaClient) == (mqd_t)-1)
+	{
+		perror("Error al cerrar la cola del cliente");
+		funcionLog("Error al cerrar la cola del cliente");
+		exit(-1);
+	}
+	exit(0);
 }
