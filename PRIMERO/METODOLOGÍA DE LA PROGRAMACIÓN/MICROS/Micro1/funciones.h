@@ -6,13 +6,13 @@
 #include <stdlib.h>
 /**
 @file funciones.h
-@author Álvaro Roldán Lucena
+@author XXXX
 @date 13/04/2020
 @brief Cabeceras funciones.
 */
 /**
 @fn reservarMemoria (int nFil, int nCol) Reserva memoria de una matriz
-@author Álvaro Roldán Lucena 
+@author XXXX
 @pre Pedimos nfil y ncol en el main al usuario, para generar la matriz.
 @param nfil Numero de filas.
 @param ncol Numero de columnas.
