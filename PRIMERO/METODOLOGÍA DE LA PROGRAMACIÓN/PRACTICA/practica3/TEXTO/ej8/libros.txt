@@ -1,0 +1,9 @@
+Alvaro
+Roldan
+13.520000 0
+Antonio Roldan
+Tapia
+56.980000 6
+Hola
+Que tal
+123.669998 0
